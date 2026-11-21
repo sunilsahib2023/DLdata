@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=+, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+.box
+{
+  width:100px;
+  height:100px;
+  background-color:rgba(237, 63, 113, 0.587);
+  position:absolute;
+  top:100px;
+  left:100px;
+  box-shadow: 5px 5px 5px gray;
+  text-align:center;
+  font-size:40px;
+  color:white;
+  padding-top:20px;
+  cursor:pointer;
+}
+
+</style>
+<body>
+<script>
+    
+    var d
+for(var i = 0;i<5;i++)
+{
+ d = document.createElement("div")
+document.body.appendChild(d)
+d.className="box";
+d.innerHTML=i;
+d.style.left = (50 + i * 120) + 'px';   
+ d.style.top = '50px';
+sk(d);
+}
+var offsetX,offsetY ;
+
+function sk(s)
+{
+     
+s.addEventListener("mousedown",function(e)
+{
+   
+       offsetX = e.clientX - this.offsetLeft;
+       offsetY = e.clientY - this.offsetTop;
+
+function mv(e)
+{
+s.style.left = (e.clientX - offsetX) + "px";
+s.style.top = (e.clientY - offsetY) + "px";
+}
+
+function mu()
+{
+document.removeEventListener('mousemove',mv) 
+document.removeEventListener('mousemoup',mu) 
+}
+                 
+document.addEventListener('mousemove', mv);
+document.addEventListener('mouseup', mu);
+
+})
+}
+document.title="No Error"
+
+</script>
+
+   
+</body>
+</html>
