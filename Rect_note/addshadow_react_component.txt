@@ -1,0 +1,39 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+// Component that will return an
+// unordered list
+
+  function Adshadow(props)
+  {
+   const  p = {
+   color:"red",
+   width:"70%",
+   background:"black",
+   fontFamily:"Arial black",
+   textAlign:"center",
+   fontSize:"50px"
+   }
+      const c = props.shadowcolor
+      const t = props.text
+      const s = props.size
+
+      return(
+         <div style={p}><h1>{props.t}</h1></div>
+      )
+
+  }
+
+const d = document.createElement("div")
+document.body.appendChild(d)
+const root = ReactDOM.createRoot(d)
+root.render(
+ <div>
+ <h1>Ready</h1>
+<Adshadow shadowcolor = "red" t="50% Sale" />
+ 
+ </div>
+
+
+
+)

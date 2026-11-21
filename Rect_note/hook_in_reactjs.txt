@@ -1,0 +1,281 @@
+
+# Hook in React JS
+
+
+In React.js, a "hook" refers to a category of functions that allow you to add state and other React features to functional components, which were traditionally stateless. Hooks were introduced in React 16.8 as a way to manage state and side effects in functional components without the need for class components.
+
+Hooks provide a more concise and readable way to work with stateful logic, making functional components as powerful and feature-rich as class components, while also promoting better code organization and reusability. Here are some of the most commonly used React hooks:
+
+Hooks have greatly simplified the process of writing and maintaining React components, making functional components more powerful and expressive while reducing the complexity associated with class components. They have become a fundamental part of modern React development.
+
+
+1. `useState`: This hook lets you add state to your functional components. It returns a state variable and a function to update that variable.
+
+2. `useEffect`: This hook enables you to perform side effects in your component, such as data fetching, DOM manipulation, or subscribing to events. It's executed after rendering.
+
+3. `useContext`: This hook allows you to access the context provided by a parent component without manually passing down props through all intermediary components.
+
+4. `useReducer`: Similar to `useState`, this hook allows you to manage state, but it's more suitable for managing complex state logic.
+
+5. `useCallback` and `useMemo`: These hooks optimize performance by memoizing functions and values, respectively, to prevent unnecessary re-renders.
+
+6. `useRef`: This hook provides a way to access the DOM directly or persist values across renders without causing re-renders.
+
+7. `useLayoutEffect`: Similar to `useEffect`, this hook is executed synchronously after all DOM mutations. It's useful for DOM manipulations that require accurate measurements.
+
+8. `useImperativeHandle`: This hook allows you to customize the instance value that's exposed when using `ref` with `forwardRef`.
+
+9. `useDebugValue`: This hook provides a way to display custom labels for custom hooks in React DevTools.
+
+10  `custom hooks: You can also create your own custom hooks to encapsulate reusable logic that can be shared across multiple components
+
+
+Hooks enable you to write more modular, testable, and maintainable code by encapsulating related functionality within custom hooks. This approach promotes the separation of concerns and makes it easier to reuse logic across different components.
+
+Here's a simple example of using the `useState` and `useEffect` hooks in a functional component:
+
+
+
+********************************************** Use State Exampe *********************************************
+import { useState } from "react";
+import ReactDom from "react-dom/client";
+
+function Usingstate_example() {
+  const [c1, setc1] = useState("red");
+  const [c2, setc2] = useState("green");
+  const [c3, setc3] = useState("teal");
+  const [c4, setc4] = useState("yellow");
+
+  const f1 = (e) => {
+    //alert("working");
+    setc1("Red");
+    document.body.style.background = e.target.innerHTML;
+    //alert(e.target.innerHTML);
+  };
+
+  const f2 = (e) => {
+    //alert("working");
+    setc2("Green");
+    document.body.style.background = e.target.innerHTML;
+    //alert(e.target.innerHTML);
+  };
+
+  const f3 = (e) => {
+    //alert("working");
+    setc3("teal");
+    document.body.style.background = e.target.innerHTML;
+    //alert(e.target.innerHTML);
+  };
+
+  const f4 = (e) => {
+    //alert("working");
+    setc4("yellow");
+    document.body.style.background = e.target.innerHTML;
+    //alert(e.target.innerHTML);
+  };
+
+  return (
+    <>
+      <button type="button" onClick={f1}>
+        {c1}
+      </button>
+      <button type="button" onClick={f2}>
+        {c2}
+      </button>
+      <button type="button" onClick={f3}>
+        {c3}
+      </button>
+      <button type="button" onClick={f4}>
+        {c4}
+      </button>
+    </>
+  );
+}
+
+export default Usingstate_example;
+
+
+
+*****************************************Working Example *************************************************************
+import ReactDOM from 'react-dom'
+import React, { useState, useEffect } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  const [info, setinfo] = useState("");
+
+
+  useEffect(() => {
+    document.title = `Count: ${count}`;
+
+      }, [count]);
+
+
+
+    
+  function setbackground()
+  {
+       //alert({count})
+      // alert("Random background is setted")
+       var r = Math.round(Math.random()*255)
+       var g = Math.round(Math.random()*255)
+       var b = Math.round(Math.random()*255)
+       document.body.style.background = "rgb(" +r+","+g+","+b+")"
+     } 
+ 
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <button onClick = {setbackground}>Set Random 
+       Background color</button><br/><br/>
+
+
+
+       <p>Object Name is {info} </p>
+       <button onClick ={() => setinfo(<h1>Counter Object</h1>)}>About Object</button>
+    
+    </div>
+  );
+}
+
+
+
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<div><Counter /></div>);
+
+
+*********************************************************************************
+
+
+
+
+In this example, the `useState` hook adds state (`count`) to the functional component, and the `useEffect` hook sets the document title whenever the `count` state changes.
+
+
+# In React, the useEffect() 
+hook is used for handling side effects in functional components. Side effects refer to operations or interactions that occur outside the scope of the component's render cycle, such as data fetching, DOM manipulation, subscriptions, and more. The useEffect() hook is a way to manage these side effects in a clean and structured manner.
+
+The useEffect() hook accepts two arguments: a function and an optional array of dependencies. The function you provide to useEffect() will be executed after the component renders, and it can contain code that performs side effects. The optional array of dependencies allows you to specify values from the component's state or props that the effect depends on. If any of the dependencies change between renders, the effect will be re-run.
+
+for example
+*****************************************************************************************
+import React, { useState, useEffect } from 'react';
+
+function ExampleComponent() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // This function will be executed after the component renders
+    // It can contain side effect code, such as data fetching
+
+    fetchData()
+      .then(response => setData(response))
+      .catch(error => console.error(error));
+
+    // You can also return a cleanup function from useEffect
+    return () => {
+      // This function will be called when the component is unmounted
+      // It can be used to clean up any resources created by the effect
+    };
+  }, []); // An empty dependency array means the effect runs only once after the initial render
+
+  return (
+    <div>
+      {/* Render your component using the data */}
+    </div>
+  );
+}
+
+*******************************************************************************
+Explanation of the above example:-
+
+In this example, the useEffect() hook is used to fetch data after the component renders. The empty dependency array [] means that the effect will only run after the initial render. If you provide dependencies, the effect will re-run whenever any of those dependencies change.
+
+By using useEffect(), you can separate side effect logic from the main rendering logic of your component, making your code easier to understand, maintain, and test. It helps you avoid issues related to timing, memory leaks, and unnecessary re-renders.
+
+
+
+
+
+
+
+
+#  Creating component whcih will  create naviation bar
+
+
+
+
+
+import React, { useState } from "react";
+
+const NavigationBar = () => {
+  const [activeTab, setActiveTab] = useState("home");
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+  };
+  return (
+    <div>
+      <nav>
+        <ul className={"mymenu"}>
+          <li
+            className={activeTab === "home" ? "active" : ""}
+            onClick={() => handleTabChange("home")}
+          >
+            Home
+          </li>
+
+          <li
+            className={activeTab === "about" ? "active" : ""}
+            onClick={() => handleTabChange("about")}
+          >
+            About
+          </li>
+          <li
+            className={activeTab === "services" ? "active" : ""}
+            onClick={() => handleTabChange("services")}
+          >
+            Services
+          </li>
+          <li
+            className={activeTab === "contact" ? "active" : ""}
+            onClick={() => handleTabChange("contact")}
+          >
+            Contact
+          </li>
+        </ul>
+      </nav>
+
+      {/* Content based on the active tab */}
+      {activeTab === "home" && <div>Home Content</div>}
+      {activeTab === "about" && <div>About Content</div>}
+      {activeTab === "services" && <div>Services Content</div>}
+      {activeTab === "contact" && <div>Contact Content</div>}
+    </div>
+  );
+};
+
+export default NavigationBar;
+
+Example of a simple navigation bar component using hooks in React. In this example, we'll use the `useState` hook to manage the active tab and render different content based on the selected tab.
+
+
+
+In this example, we've created a `NavigationBar` component that uses the `useState` hook to manage the `activeTab` state. Clicking on a tab updates the active tab and renders the corresponding content based on the selected tab.
+
+Note that this is a basic example, and you can further enhance and style the navigation bar according to your project's requirements. Additionally, you might want to consider using CSS-in-JS libraries or external stylesheets to style your components.
+
+
+# In the above program, === is the strict equality operator in JavaScript. It's used to compare two values for equality while also considering their data types. Unlike the loose equality operator ==, which performs type coercion, the strict equality operator === does not perform any type conversion.
+
+
+#In this line of code, we are using activeTab === 'home' to check if the activeTab state is equal to the string 'home'. If it is equal, the className is set to 'active', which is a CSS class that could be used to style the active tab differently. If it's not equal, the className is set to an empty string.
+
+This usage of === ensures that we're comparing the activeTab state with the string 'home' without any type conversion. If you were to use == instead of ===, JavaScript would perform type coercion, which might lead to unexpected results if the types being compared are different.
+
+
+
+
+

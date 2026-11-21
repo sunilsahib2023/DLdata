@@ -1,0 +1,25 @@
+# After install Node js from install
+check version on cmd
+c:>node
+c:>node -v
+c:>npm -v
+
+#installing npm globally
+c:>npm install --global npm
+
+# To Create new App
+
+c:>npx create-reac-app myapp1
+  this will create a folder and copy nessary json file
+
+# App Folder is creted 
+
+#change Directory or Folder
+cd myapp1
+
+Now start app 
+
+c:/myapp1>npm start
+This command will open js node server on port 3000 and (will take time) in borowser and
+run the index page of  your app first.js 
+
